@@ -1,0 +1,2 @@
+agvs_control:agvs_pad:chassis_drive
+-DCATKIN_DEVEL_PREFIX=/home/txz/AGV_CAGE/devel -DCMAKE_INSTALL_PREFIX=/home/txz/AGV_CAGE/install -G Unix Makefiles
