@@ -14,8 +14,6 @@ cd7389a5eb702c65aaf5a9b2cfe20b45 /home/txz/AGV_CAGE/devel/lib/python2.7/dist-pac
 ef7111f30be742ce8bb7746a4677d376 /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/agvs_control/srv/__init__.py
 9a5170b25c1f8514dbca6332950b3c2f /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/agvs_control/srv/_cmd_control_mode.py
 2a0757d4574c2718d55130247f643610 /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/agvs_control/srv/_cmd_control_task.py
-39f1a3ec938389c563cceb0d4b272872 /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/agvs_pad/srv/__init__.py
-9988d5ce92385018f7cee3cf5b29d725 /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/agvs_pad/srv/_cmd_lift.py
 d6e0001d9b2a6b811c62be8077a98633 /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/chassis_drive/msg/__init__.py
 a988877ec231bad7d9f406e7c691f5ce /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/chassis_drive/msg/_chassis_alarm.py
 3c285a74a8c4ff6e1ebc735e40391338 /home/txz/AGV_CAGE/devel/lib/python2.7/dist-packages/chassis_drive/msg/_chassis_bat.py
@@ -27,7 +25,6 @@ b061b7e72ba5cb8231cac3dc75f70054 /home/txz/AGV_CAGE/devel/share/common-lisp/ros/
 ff495278b30fb0c4d90b2e906d8f45b3 /home/txz/AGV_CAGE/devel/share/common-lisp/ros/agvs_control/msg/date_realtime_feedback.lisp
 c481a5b4ed27dd319dc623cf27f63db5 /home/txz/AGV_CAGE/devel/share/common-lisp/ros/agvs_control/srv/cmd_control_mode.lisp
 d02d0eaf75984f54e202e17fd1226f4c /home/txz/AGV_CAGE/devel/share/common-lisp/ros/agvs_control/srv/cmd_control_task.lisp
-0a381032869405e53eaa5acf5497989b /home/txz/AGV_CAGE/devel/share/common-lisp/ros/agvs_pad/srv/cmd_lift.lisp
 99b65610e053f5e4761d783e0461b48c /home/txz/AGV_CAGE/devel/share/common-lisp/ros/chassis_drive/msg/chassis_alarm.lisp
 6b12a8881077e210d7582122adf49372 /home/txz/AGV_CAGE/devel/share/common-lisp/ros/chassis_drive/msg/chassis_bat.lisp
 23364d6b8f18f0efd7c8939be3ffadea /home/txz/AGV_CAGE/devel/share/common-lisp/ros/chassis_drive/msg/chassis_cmd.lisp
@@ -37,7 +34,6 @@ d02d0eaf75984f54e202e17fd1226f4c /home/txz/AGV_CAGE/devel/share/common-lisp/ros/
 76e24576a38445e845b89e184b82db68 /home/txz/AGV_CAGE/devel/share/gennodejs/ros/agvs_control/msg/date_realtime_feedback.js
 1846560ae8cad167b2dc5b0f8eafde94 /home/txz/AGV_CAGE/devel/share/gennodejs/ros/agvs_control/srv/cmd_control_mode.js
 6601222184e4982af24defd4d735e941 /home/txz/AGV_CAGE/devel/share/gennodejs/ros/agvs_control/srv/cmd_control_task.js
-60e90b4a537046177b0cd8517a7e27fa /home/txz/AGV_CAGE/devel/share/gennodejs/ros/agvs_pad/srv/cmd_lift.js
 153a0f68489c233a6384a88402ff1389 /home/txz/AGV_CAGE/devel/share/gennodejs/ros/chassis_drive/msg/chassis_alarm.js
 45b8f3746e474b84dffa1eca46a1c5ed /home/txz/AGV_CAGE/devel/share/gennodejs/ros/chassis_drive/msg/chassis_bat.js
 45c909472f263bc7d8e631af6e6d029a /home/txz/AGV_CAGE/devel/share/gennodejs/ros/chassis_drive/msg/chassis_cmd.js
@@ -48,8 +44,6 @@ a6bae6a7a701a0a2b90bc37b7518907d /home/txz/AGV_CAGE/devel/share/roseus/ros/agvs_
 584bb7ed43737fc0f9ea06e9bdd144d3 /home/txz/AGV_CAGE/devel/share/roseus/ros/agvs_control/msg/date_realtime_feedback.l
 71eb561940a96f980bc7132abe1d1c46 /home/txz/AGV_CAGE/devel/share/roseus/ros/agvs_control/srv/cmd_control_mode.l
 385766d7b683dc233f86dd8f7311d675 /home/txz/AGV_CAGE/devel/share/roseus/ros/agvs_control/srv/cmd_control_task.l
-2332e1ad8dc82af2911a0df1098a252e /home/txz/AGV_CAGE/devel/share/roseus/ros/agvs_pad/manifest.l
-5a3633066f837dc2a27667312e670a83 /home/txz/AGV_CAGE/devel/share/roseus/ros/agvs_pad/srv/cmd_lift.l
 f30602b82912d6900fc66e8f785aae06 /home/txz/AGV_CAGE/devel/share/roseus/ros/chassis_drive/manifest.l
 d840fdbf8dbe1bf69774c1d92b0120c3 /home/txz/AGV_CAGE/devel/share/roseus/ros/chassis_drive/msg/chassis_alarm.l
 34b726aa32c0e3367fa1af200cdd078d /home/txz/AGV_CAGE/devel/share/roseus/ros/chassis_drive/msg/chassis_bat.l

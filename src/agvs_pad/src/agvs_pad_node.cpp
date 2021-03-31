@@ -55,8 +55,6 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-
-
 #define DEFAULT_MAX_SKID_LINEAR_SPEED	280.0// m/s
 #define DEFAULT_MAX_ANGULAR_POSITION	900.0 // rads/s
 
@@ -79,7 +77,7 @@
 #define DEFAULT_JOY			"/joy"
 #define DEFAULT_HZ			20.0
 
-#define default_button_dead_man_  	0
+#define default_button_ageing_test_  	0
 
 #define default_button_speed_up_        0
 #define default_button_speed_down_      2
@@ -175,6 +173,7 @@ private:
 
 	ros::ServiceClient raise_elevator_client_;
 	ros::ServiceClient lower_elevator_client_;
+        ros::ServiceClient ageing_test_client_;
 
 	//! // Name of the joystick's topic
 	std::string  joy_topic_;	
@@ -191,6 +190,7 @@ private:
 	std::string service_raise_elevator_;
 	//! Name of the service called to lower the elevator
 	std::string service_lower_elevator_;
+        std::string service_ageing_test_;
 	
 	// JOYSTICK
 	//! Current number of buttons of the joystick
@@ -202,7 +202,7 @@ private:
 	//! Vector to save and control the axis values
 	std::vector<Button> vButtons;
 	//! Number of the DEADMAN button
-	int button_dead_man_;
+	int button_ageing_test_;
 	//! Number of the button for increase or decrease the speed max of the joystick	
 	int button_speed_up_, button_speed_down_;
 	int button_modeswtich_1_, button_modeswtich_2_;
@@ -236,7 +236,7 @@ AgvsPad::AgvsPad():  nh_("~")
 	// MOTION CONF
 	nh_.param("cmd_topic_vel", cmd_topic_vel, std::string("/agvs_control/pads_cmd"));
 	
-	nh_.param("button_dead_man", button_dead_man_, default_button_dead_man_);
+	nh_.param("button_dead_man", button_ageing_test_, default_button_ageing_test_);
 	nh_.param("button_speed_up", button_speed_up_, default_button_speed_up_);
 	nh_.param("button_speed_down", button_speed_down_, default_button_speed_down_); 
 
@@ -265,6 +265,8 @@ AgvsPad::AgvsPad():  nh_("~")
 
 	nh_.param("service_raise_elevator", service_raise_elevator_, std::string("/agvs_pad/raise_elevator"));
 	nh_.param("service_lower_elevator", service_lower_elevator_, std::string("/agvs_pad/lower_elevator"));
+
+        nh_.param("service_ageing_test",service_ageing_test_,std::string("/agvs_pad/ageing_test"));
 	
 	ROS_INFO("AgvsPad num_of_buttons_ = %d, axes = %d, topic controller: %s, hz = %.2lf", num_of_buttons_, num_of_axes_, cmd_topic_vel.c_str(), desired_freq_);	
 	
@@ -280,11 +282,12 @@ AgvsPad::AgvsPad():  nh_("~")
 	//FIXME TXZ change to msg "chassis_drive/chassis_cmd.h"
         this->vel_pub_ = nh_.advertise<agvs_control::date_pads_cmd>(this->cmd_topic_vel, 50); 
 	
-	joy_sub_ = nh_.subscribe<sensor_msgs::Joy>(joy_topic_, 1, &AgvsPad::joyCallback, this);
+	this->joy_sub_ = nh_.subscribe<sensor_msgs::Joy>(joy_topic_, 1, &AgvsPad::joyCallback, this);
 
 
 	raise_elevator_client_ = nh_.serviceClient<chassis_drive::cmd_lift>(service_raise_elevator_);
 	lower_elevator_client_ = nh_.serviceClient<chassis_drive::cmd_lift>(service_lower_elevator_);
+        ageing_test_client_    = nh_.serviceClient<std_srvs::Empty>(service_ageing_test_);
 		
 	bOutput1 = bOutput2 = 0;
 	//enable_disable_srv_ = nh_.advertiseService("/agvs_pad/enable_disable",  &AgvsPad::EnableDisable, this);  //TODO auto or manual
@@ -302,7 +305,7 @@ AgvsPad::AgvsPad():  nh_("~")
 void AgvsPad::Update()
 {
         //PublishState();
-        ROS_INFO("update...\n");
+        //ROS_INFO("update...\n");
 }
 
 //! 
@@ -338,9 +341,11 @@ void AgvsPad::joyCallback(const sensor_msgs::Joy::ConstPtr& joy)
 	for(int i = 0; i < joy->axes.size(); i++){
 		this->fAxes[i] = joy->axes[i];
 	}
+
 	for(int i = 0; i < joy->buttons.size(); i++){
 		this->vButtons[i].Press(joy->buttons[i]);
 	}
+
 	if (vButtons[button_modeswtich_1_].IsPressed()&&vButtons[button_modeswtich_2_].IsPressed())
 	{
 		bEnable=!bEnable;
@@ -361,11 +366,7 @@ void AgvsPad::ControlLoop(){
         
         while(ros::ok()) {
                         
-                Update();
-                if(vButtons[button_dead_man_].IsReleased()){
-                        ROS_INFO("vButtons_test\n");
-                }
-                        
+                Update();         
                 if(bEnable){
                         ROS_INFO("breakpoint_2\n");
                         //adjustment the ratio parameter
@@ -381,7 +382,6 @@ void AgvsPad::ControlLoop(){
 
                         }
 #endif 
-                        
                         desired_linear_speed = max_linear_speed_ * current_speed_lvl * fAxes[axis_linear_speed_];
                         desired_angular_position = max_angular_position_ * fAxes[axis_angular_position_];
 
@@ -410,7 +410,12 @@ void AgvsPad::ControlLoop(){
                                 chassis_drive::cmd_lift empty_srv;
                                 lower_elevator_client_.call(empty_srv);
                                 ROS_INFO("Lower elevator");
-                        }					
+                        }	
+                        if(vButtons[button_ageing_test_].IsReleased()){//ageing_test
+                                std_srvs::Empty empty_srv;
+                                ageing_test_client_.call(empty_srv);
+                                ROS_INFO("ageing_test\n");
+                        }				
                 }
                 ros::spinOnce();
                 r.sleep();

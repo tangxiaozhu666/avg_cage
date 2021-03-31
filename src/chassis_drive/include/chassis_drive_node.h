@@ -41,9 +41,9 @@ using namespace std;
                 //0010 0000  r-red
                 //0100 0000  r-b
                 //1000 0000  r-g
-#define  rgb_read               2400
-#define  rgb_blue               1200
-#define  rgb_green              0900
+#define  rgb_read               0x2400
+#define  rgb_blue               0x1200
+#define  rgb_green              0x0900
 
 //lift controlflag
 #define rise    1
